@@ -1,6 +1,9 @@
 {% extends 'main.html' %}
 {% block content %}
 
+    <!-- Make sure I added the correct settings in settings.py and urls.py in project folder to get it to display-->
+    <img style="max-width: 500px" src="{{projectObj.featured_image.url}}">
+
     <h1>Testing out the projects template with pk</h1>
     <p> Name: {{ projectObj.title }} </p>
     <p> Date Created: {{ projectObj.created }} </p>

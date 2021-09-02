@@ -16,7 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# import these settings to properly display user uploaded images
+# first is to have access to settings.py, second to allow us to create a url for our static files
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('projects.urls')),
 ]
+
+# use the static method to create a url path so django knows how to display user uploaded images saved
+# the media root path
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

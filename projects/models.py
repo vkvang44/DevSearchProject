@@ -11,6 +11,16 @@ class Project(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
+    '''
+    IMPORTANT!!!
+    When I create an imagefield model, I need to make some configurations to MEDIA_ROOT in the settings.py 
+    to make sure that user uploaded images go into the static/images folders so it does not pollute my
+    files
+    
+    created an image field model that allows users to upload images
+    '''
+    featured_image = models.ImageField(null=True, blank=True, default='default.jpg')
+
     # create a connection from project to tags, project to Review
     tags = models.ManyToManyField('Tag', blank=True)
     vote_total = models.IntegerField(default=0, null=True, blank=True)

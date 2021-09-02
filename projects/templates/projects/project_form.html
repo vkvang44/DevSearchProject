@@ -1,7 +1,11 @@
 {% extends 'main.html' %}
 {% block content %}
     <h1> Project Form</h1>
-    <form method="POST">
+    <!-- IMPORTANT NOTE: make sure to set enctype="multipart/form-data" to save user uploaded images on site
+           make sure to update backend by going into specific methods in the views.py and adding request.FILES
+           to the form variable once it is POSTED to make sure it actually saves in the database
+    -->
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.as_p}}
         <input type="submit">
