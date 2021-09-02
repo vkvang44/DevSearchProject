@@ -6,4 +6,4 @@ class ProjectForm(ModelForm):
     # the model we are creating the form for
     class Meta:
         model = Project
-        fields = '__all__'
+        fields = ['title', 'description', 'demo_link', 'source_link', 'tags']

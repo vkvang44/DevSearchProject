@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Project
 from .forms import ProjectForm
 
@@ -20,8 +20,32 @@ def project(request, pk):
     return render(request, 'projects/project.html', context)
 
 
+# create a new project
 def createProject(request):
     # create an instance of this class
     form = ProjectForm()
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('projects')
+
+    context = {'form': form}
+    return render(request, 'projects/project_form.html', context)
+
+
+# updated an existing project
+def updateProject(request, pk):
+    project = Project.objects.get(id=pk)
+    # create an instance of this class
+    form = ProjectForm(instance=project)
+
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, instance=project)
+        if form.is_valid():
+            form.save()
+            return redirect('projects')
+
     context = {'form': form}
     return render(request, 'projects/project_form.html', context)

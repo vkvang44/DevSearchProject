@@ -3,18 +3,19 @@
 <h1>Testing out the projects template</h1>
 <table>
     <tr>
-        <th>ID</th>
         <th>Project</th>
         <th>Votes</th>
         <th>Positive Votes</th>
+        <th>Date Created</th>
+        <th></th>
         <th></th>
     </tr>
     {% for project in projects %}
     <tr>
-            <td>{{ project.id }}</td>
             <td>{{ project.title }}</td>
             <td>{{ project.vote_total }}</td>
             <td>{{ project.vote_ratio }}%</td>
+            <td><a href=" {% url 'update_project' project.id %} ">Edit</a></td>
             <td><a href=" {% url 'project' project.id %} ">View</a></td>
     </tr>
     {% endfor %}
