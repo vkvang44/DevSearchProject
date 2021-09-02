@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import Project
 
 
@@ -12,6 +11,9 @@ def projects(request):
 
 
 def project(request, pk):
+    # get the specific item from Project with an ID that matches the Primary key
     projectObj = Project.objects.get(id=pk)
+    # get the manytomany items linked to the project object
+    # tags = projectObj.tags.all()
     context = {'projectObj': projectObj}
     return render(request, 'projects/project.html', context)

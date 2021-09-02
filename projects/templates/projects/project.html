@@ -1,7 +1,15 @@
 {% extends 'main.html' %}
 {% block content %}
-<h1>Testing out the projects template with pk</h1>
-<p> Name: {{ projectObj.title }} </p>
-<p> Date Created: {{ projectObj.created }} </p>
-<p> ID: {{ projectObj.id }} </p>
+
+    <h1>Testing out the projects template with pk</h1>
+    <p> Name: {{ projectObj.title }} </p>
+    <p> Date Created: {{ projectObj.created }} </p>
+    <p> ID: {{ projectObj.id }} </p>
+    <p>Description: {{ projectObj.description }}</p>
+
+    <!-- I can call the method directly in the html template instead of passing in context variable-->
+    {% for tag in projectObj.tags.all %}
+        <span style="border:1px solid grey">{{tag}}</span>
+    {% endfor %}
+
 {% endblock content %}
