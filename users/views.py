@@ -1,7 +1,15 @@
 from django.shortcuts import render
-
+from .models import Profile
 
 
 # Create your views here.
-def user(request):
-    return render(request, 'users/profiles.html', {})
+def profiles(request):
+    profiles = Profile.objects.all()
+    context = {'profiles': profiles}
+    return render(request, 'users/profiles.html', context)
+
+
+def userProfile(request, pk):
+    profileObj = Profile.objects.get(id=pk)
+    context = {'profile':profileObj}
+    return render(request, 'users/user_profile.html', context)
