@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 import uuid
 
 
-
 '''
 Create your models here.
 creating our own profile model and doing a one-to-one mapping of this profile model to
@@ -42,6 +41,4 @@ class Skill(models.Model):
     def __str__(self):
         return str(self.name)
 
-
-# signal methods
 
