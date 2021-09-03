@@ -1,13 +1,29 @@
 {% extends 'main.html' %}
 {% block content %}
-    <h1> Project Form</h1>
     <!-- IMPORTANT NOTE: make sure to set enctype="multipart/form-data" to save user uploaded images on site
            make sure to update backend by going into specific methods in the views.py and adding request.FILES
            to the form variable once it is POSTED to make sure it actually saves in the database
     -->
-    <form method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input type="submit">
-    </form>
+    <!-- Main Section -->
+    <main class="formPage my-xl">
+        <div class="content-box">
+            <div class="formWrapper">
+                <a class="backButton" href="{% url 'projects' %}"><i class="im im-angle-left"></i></a>
+                <br>
+                <form class="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Input:Text | use a for loop to access all the form fields -->
+                    {% for field in form %}
+                    <div class="form__field">
+                        <label>{{field.label}}</label>
+                        {{field}}
+                    </div>
+                    {% endfor %}
+
+                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Add Project" />
+
+                </form>
+            </div>
+        </div>
+    </main>
 {% endblock %}
