@@ -42,7 +42,7 @@ def updateProject(request, pk):
     form = ProjectForm(instance=project)
 
     if request.method == 'POST':
-        form = ProjectForm(request.POST, request.FILES, instance=project)
+        form = ProjectForm(requestb .POST, request.FILES, instance=project)
         if form.is_valid():
             form.save()
             return redirect('projects')
