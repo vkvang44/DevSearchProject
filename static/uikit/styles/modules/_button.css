@@ -22,6 +22,12 @@
   backface-visibility: hidden;
   transition: all 0.3s ease-in-out;
 }
+.btn--center{
+  margin-top: 50px;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 
 .btn:disabled,
 .btn--disabled {
