@@ -26,11 +26,24 @@ def createProfile(sender, instance, created, **kwargs):
         )
 
 
+def updateProfile(sender, instance, created, **kwargs):
+    # have to set it up like this to access the 1-to-1 relationship of profile and user
+    profile = instance
+    user = profile.user
+    if created == False:
+        user.first_name = profile.name
+        user.username = profile.username
+        user.email = profile.email
+        user.save()
+
+
 def deleteUser(sender, instance, **kwargs):
     user = instance.user
     user.delete()
 
+
 # IMPORTANT: the .connect sets up the connections between the method and an instance of the object that will passed
 # to the method
 post_save.connect(createProfile, sender=User)
+post_save.connect(updateProfile, sender=Profile)
 post_delete.connect(deleteUser, sender=Profile)

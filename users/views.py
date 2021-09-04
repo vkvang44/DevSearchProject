@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from .models import Profile
 from django.contrib import messages
-from .form import CustomUserCreationForm
+from .form import CustomUserCreationForm, ProfileForm
 from django.contrib.auth.decorators import login_required
 
 
@@ -74,7 +74,7 @@ def registerUser(request):
             user.username = user.username.lower()
             user.save()
             login(request, user)
-            return redirect('profiles')
+            return redirect('edit_account')
         '''
         else:
             messages.error(request, 'An error has occurred during registration')
@@ -90,3 +90,22 @@ def userAccount(request):
     profile = request.user.profile
     context = {'profile':profile, }
     return render(request, 'users/account.html', context)
+
+
+"""
+IMPORTANT: Because I separated the profiles and user model, I have to use signals to update the user model itself
+when I make updates to the profile model on the website. Look at updateProfile() in signals.py to understand how 
+to set it up
+"""
+@login_required(login_url='login')
+def editAccount(request):
+    profile = request.user.profile
+    form = ProfileForm(instance=profile)
+
+    if request.method == "POST":
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+            return redirect('account')
+    context = {'form':form}
+    return render(request, 'users/profile_form.html', context)
