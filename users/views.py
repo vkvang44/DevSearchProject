@@ -4,12 +4,20 @@ from django.contrib.auth.models import User
 from .models import Profile
 from django.contrib import messages
 from .form import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
 def profiles(request):
     profiles = Profile.objects.all()
     context = {'profiles': profiles}
+
+    """ 
+    different method to query the skill fields depending on the skills having description or not
+    topSkills = profile.skill_set.exclude(description_exact="")
+    otherSkills = profile.skill_set.filter(description="")
+    """
+
     return render(request, 'users/profiles.html', context)
 
 
@@ -74,3 +82,11 @@ def registerUser(request):
 
     context = {'page': page, 'form': form}
     return render(request, 'users/login_register.html', context)
+
+
+@login_required(login_url='login')
+def userAccount(request):
+    # get the logged in user by using request.user.profile
+    profile = request.user.profile
+    context = {'profile':profile, }
+    return render(request, 'users/account.html', context)
