@@ -23,7 +23,6 @@ def project(request, pk):
 
 # decorator that requires a user to be logged in to access
 @login_required(login_url='login')
-# create a new project
 def createProject(request):
     # create an instance of this class
     form = ProjectForm()
@@ -39,7 +38,6 @@ def createProject(request):
 
 
 @login_required(login_url='login')
-# updated an existing project
 def updateProject(request, pk):
     project = Project.objects.get(id=pk)
     # create an instance of this class

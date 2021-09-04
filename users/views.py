@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from .models import Profile
+from django.contrib import messages
+from .form import CustomUserCreationForm
 
 
 # Create your views here.
@@ -18,6 +20,7 @@ def userProfile(request, pk):
 
 
 def loginUser(request):
+    page = 'login'
 
     # this statement makes sure the logged in user doesnt go back to the login page
     if request.user.is_authenticated:
@@ -31,7 +34,7 @@ def loginUser(request):
         try:
             user = User.objects.get(username=username)
         except:
-            print('Username does not exist')
+            messages.error(request, 'Username does not exist')
 
         # authenticates user and checks if there exists a valid login
         user = authenticate(request, username=username, password=password)
@@ -41,11 +44,31 @@ def loginUser(request):
             login(request, user)
             return redirect('profiles')
         else:
-            print('Username OR Password is incorrect')
+            messages.error(request, 'Username OR Password is incorrect')
 
-    return render(request, 'users/login_register.html', {})
+    return render(request, 'users/login_register.html', {'page': page})
 
 
 def logoutUser(request):
     logout(request)
+    messages.error(request, 'Username was logged out!')
     return redirect('login')
+
+
+def registerUser(request):
+    page = 'register'
+    form = CustomUserCreationForm()
+
+    if request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            messages.success(request, 'You have created your profile!')
+            login(request, user)
+            return redirect('profiles')
+        else:
+            messages.error(request, 'An error has occurred during registration')
+    context = {'page': page, 'form': form}
+    return render(request, 'users/login_register.html', context)
