@@ -65,10 +65,12 @@ def registerUser(request):
             user = form.save(commit=False)
             user.username = user.username.lower()
             user.save()
-            messages.success(request, 'You have created your profile!')
             login(request, user)
             return redirect('profiles')
+        '''
         else:
             messages.error(request, 'An error has occurred during registration')
+        '''
+
     context = {'page': page, 'form': form}
     return render(request, 'users/login_register.html', context)
