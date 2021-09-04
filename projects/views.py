@@ -24,13 +24,15 @@ def project(request, pk):
 # decorator that requires a user to be logged in to access
 @login_required(login_url='login')
 def createProject(request):
-    # create an instance of this class
+    profile = request.user.profile
     form = ProjectForm()
 
     if request.method == 'POST':
         form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            project = form.save(commit=False)
+            project.owner = profile
+            project.save()
             return redirect('projects')
 
     context = {'form': form}
@@ -39,8 +41,10 @@ def createProject(request):
 
 @login_required(login_url='login')
 def updateProject(request, pk):
-    project = Project.objects.get(id=pk)
-    # create an instance of this class
+    # IMPORTANT: ensures that only the logged in user can access/edit their projects
+    profile = request.user.profile
+    project = profile.project_set.get(id=pk)
+
     form = ProjectForm(instance=project)
 
     if request.method == 'POST':
@@ -56,7 +60,8 @@ def updateProject(request, pk):
 @login_required(login_url='login')
 # delete an existing project
 def deleteProject(request, pk):
-    project = Project.objects.get(id=pk)
+    profile = request.user.profile
+    project = profile.project_set.get(id=pk)
     if request.method == 'POST':
         project.delete()
         return redirect('projects')
