@@ -51,7 +51,13 @@
             <h3 class="devInfo__title">About Me</h3>
             <p class="devInfo__about">{{profile.bio}}</p>
           </div>
+
           <div class="devInfo">
+            <!--
+            different method to query the skill fields depending on the skills having description or not
+            topSkills = profile.skill_set.exclude(description_exact="")
+            otherSkills = profile.skill_set.filter(description="")
+            -->
             <h3 class="devInfo__title">Skills</h3>
             <div class="devInfo__skills">
             {% for skill in profile.skill_set.all %}
