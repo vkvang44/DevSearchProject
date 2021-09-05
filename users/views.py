@@ -1,16 +1,31 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Skill
 from django.contrib import messages
 from .form import CustomUserCreationForm, ProfileForm, SkillForm
 from django.contrib.auth.decorators import login_required
-
+from django.db.models import Q
 
 # Create your views here.
 def profiles(request):
-    profiles = Profile.objects.all()
-    context = {'profiles': profiles}
+    # based on method="GET" inside a form tag. If it is triggered then a search_query will be populated with user
+    # inputted string
+    search_query = ''
+    if request.GET.get('search_query'):
+        search_query = request.GET.get('search_query')
+
+    # will filter the profiles depending on search_query string
+    # Queue search with Q() | Q() will look for one or the other with "| = or"
+    # Q(skill__in=skill) -> we want to know if the profile object contains a skill object within the skill query set
+    # variable
+    skill = Skill.objects.filter(name__icontains=search_query)
+    profiles = Profile.objects.distinct().filter(Q(name__icontains=search_query) |
+                                      Q(short_intro__icontains=search_query) |
+                                      Q(skill__in=skill)
+                                      )
+
+    context = {'profiles': profiles, 'search_query': search_query}
 
     """ 
     different method to query the skill fields depending on the skills having description or not
