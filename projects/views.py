@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Project, Tag
-from users.models import Profile
-from .forms import ProjectForm
+from .models import Project
+from .forms import ProjectForm, ReviewForm
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from .utils import searchProjects, projectPagination
+from django.contrib import messages
 
 
 # Create your views here.
@@ -21,7 +20,19 @@ def project(request, pk):
     projectObj = Project.objects.get(id=pk)
     # get the manytomany items linked to the project object
     # tags = projectObj.tags.all()
-    context = {'projectObj': projectObj}
+
+    form = ReviewForm()
+    if request.method == 'POST':
+        form = ReviewForm(request.POST)
+        review = form.save(commit=False)
+        review.project = projectObj
+        review.owner = request.user.profile
+        review.save()
+        # update total vote count
+        projectObj.getVoteCount
+        messages.success(request, 'Your review has been posted!')
+        return redirect('project', pk=projectObj.id)
+    context = {'projectObj': projectObj, 'form':form}
     return render(request, 'projects/project.html', context)
 
 

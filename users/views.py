@@ -44,8 +44,9 @@ def loginUser(request):
         if user is not None:
             # creates a session for the user in the database and its gonna add the session to the cookie so the website
             # knows if the user is logged in
+            # the if method allows for a get request to be processed (see project.html line 61 for !next path)
             login(request, user)
-            return redirect('profiles')
+            return redirect(request.GET['next'] if 'next' in request.GET else 'account')
         else:
             messages.error(request, 'Username OR Password is incorrect')
 
