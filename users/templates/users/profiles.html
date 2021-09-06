@@ -55,5 +55,7 @@
         </div>
       </div>
     </section>
+    <!-- with queryset= passes in a property into another template -->
+    {% include 'pagination.html' with queryset=profiles custom_range=custom_range %}
   </main>
 {% endblock content %}

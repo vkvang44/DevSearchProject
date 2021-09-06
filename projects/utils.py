@@ -1,5 +1,6 @@
 from .models import Project, Tag
 from django.db.models import Q
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 def searchProjects(request):
     # query the items from Project into the variable proj
@@ -16,3 +17,40 @@ def searchProjects(request):
                                                  )
 
     return projects, search_query
+
+
+def projectPagination(request, projects):
+    """
+    page represents the current page user is on, result equals how many items displayed per page, paginator creates
+    an instance of the method Paginator that allows the projects to be displayed
+
+    try: displays the projects associated with the page number passed in
+    Except PageNotAnInteger: displays the first page when users click on projects tab
+    Except EmptyPage: takes user to the last page if they input a page number gt set amount of pages
+
+    leftIndex/rightIndex limits the range of page buttons displayed on website. If total pages = 1000 and leftIndex = 1,
+    rightIndex = 10 then only 10 buttons display
+    """
+    page = request.GET.get('page')
+    result = 6
+    paginator = Paginator(projects, result)
+
+    try:
+        projects = paginator.page(page)
+    except PageNotAnInteger:
+        page = 1
+        projects = paginator.page(page)
+    except EmptyPage:
+        page = paginator.num_pages
+        projects = paginator.page(page)
+
+    leftIndex = (int(page) - 4)
+    rightIndex = (int(page) + 5)
+    if leftIndex < 1:
+        leftIndex = 1
+    if rightIndex > paginator.num_pages:
+        rightIndex = paginator.num_pages + 1
+
+    custom_range = range(leftIndex, rightIndex)
+
+    return paginator, projects, custom_range

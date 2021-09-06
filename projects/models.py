@@ -36,6 +36,9 @@ class Project(models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering = ['created']
+
 
 # created a one to many relationship table ( project -> review )
 class Review(models.Model):

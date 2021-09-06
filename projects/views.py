@@ -4,12 +4,15 @@ from users.models import Profile
 from .forms import ProjectForm
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from .utils import searchProjects
+from .utils import searchProjects, projectPagination
+
 
 # Create your views here.
 def projects(request):
     projects, search_query = searchProjects(request)
-    context = {'projects': projects, 'search_query': search_query}
+    paginator, projects, custom_range = projectPagination(request, projects)
+
+    context = {'projects': projects, 'search_query': search_query, 'paginator': paginator, 'custom_range': custom_range}
     return render(request, 'projects/projects.html', context)
 
 
