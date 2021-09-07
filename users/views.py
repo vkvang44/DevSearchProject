@@ -30,7 +30,8 @@ def loginUser(request):
         return redirect('profiles')
     #
     if request.method == "POST":
-        username = request.POST['username']
+        # .lower() makes sure that username is lower cased to avoid case sensitivity
+        username = request.POST['username'].lower()
         password = request.POST['password']
 
         # simple try exception block to query the username from the database to see if they exist
