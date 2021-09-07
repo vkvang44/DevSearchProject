@@ -158,8 +158,8 @@ def deleteSkill(request, pk):
 def inbox(request):
     profile = request.user.profile
     messageRequests = profile.messages.all()
-    unreadCount = messageRequests.filter(is_read=False).count()
-    context={'messageRequests':messageRequests, 'unreadCount':unreadCount }
+   # unreadCount = messageRequests.filter(is_read=False).count()
+    context={'messageRequests':messageRequests}
     return render(request, 'users/inbox.html', context)
 
 
