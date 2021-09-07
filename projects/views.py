@@ -10,7 +10,6 @@ from django.contrib import messages
 def projects(request):
     projects, search_query = searchProjects(request)
     paginator, projects, custom_range = projectPagination(request, projects)
-
     context = {'projects': projects, 'search_query': search_query, 'paginator': paginator, 'custom_range': custom_range}
     return render(request, 'projects/projects.html', context)
 
