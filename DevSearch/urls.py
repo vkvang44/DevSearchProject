@@ -17,10 +17,10 @@ from django.contrib import admin
 from django.urls import path, include
 
 # import these settings to properly display user uploaded images
-# first is to have access to settings.py, second to allow us to create a url for our static files
+# first is to have access to settings.py, second to allow us to create a url for our static files, third is to allow
+# pw reset methods from auth_views
 from django.conf import settings
 from django.conf.urls.static import static
-
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [

@@ -54,6 +54,21 @@
             <p class="devInfo__about">{{profile.bio}}</p>
           </div>
 
+          {% if profile.experience_set.all %}
+          <div class="devInfo">
+            <h3 class="devInfo__title">Job Experience</h3>
+            <div class="devInfo__skills">
+            {% for job in profile.experience_set.all %}
+              <div class="devExp">
+                <h4 class="devSkill__title">{{job.title}} - {{job.company}}</h4>
+                <p class="devSkill__info">{{job.description}}</p>
+              </div>
+            {% endfor %}
+            </div>
+          </div>
+          {% endif %}
+
+          {% if profile.skill_set.all %}
           <div class="devInfo">
             <!--
             different method to query the skill fields depending on the skills having description or not
@@ -78,12 +93,14 @@
                 {% endif %}
             {% endfor %}
             </div>
-
           <!--
           Note: Just like accessing skills, do the same to access projects because they are a many-to-many relationship
           You don't have to do it for the tags because the tags and projects have a many-to-many relationship
            -->
           </div>
+          {% endif %}
+
+          {% if profile.project_set.all %}
           <div class="devInfo">
             <h3 class="devInfo__title">Projects</h3>
             <div class="grid grid--two">
@@ -113,7 +130,7 @@
             {% endfor %}
             </div>
           </div>
-
+          {% endif %}
         </div>
       </div>
     </div>

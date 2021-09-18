@@ -387,6 +387,10 @@ img {
   margin-bottom: 3rem;
 }
 
+.devExp {
+  margin-bottom: 3rem;
+}
+
 .devSkill__title {
   font-size: 1.65rem;
   font-weight: 500;
@@ -398,6 +402,12 @@ img {
     display: flex;
     justify-content: space-between;
     gap: 3rem;
+  }
+
+  .devExp {
+    display: flex
+    justify-content: space-between;
+    flex-direction: column;
   }
 
   .devSkill__info {

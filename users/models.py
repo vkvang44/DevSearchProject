@@ -1,15 +1,16 @@
+'''
+Create your models here.
+creating our own profile model and doing a one-to-one mapping of this profile model to
+the User model included within django.
+
+IMPORTANT: make sure to register models in admin.py to make sure they display in the server/admin site
+'''
+
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
 
 
-'''
-Create your models here.
-creating our own profile model and doing a one-to-one mapping of this profile model to
-the User model included within django. 
-
-IMPORTANT: make sure to register models in admin.py to make sure they display in the server/admin site
-'''
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, blank=True, null=True)
@@ -60,3 +61,13 @@ class Message(models.Model):
         ordering = ['is_read', '-created']
 
 
+class Experience(models.Model):
+    owner = models.ForeignKey(Profile, blank=True, null=True, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, blank=True, null=True)
+    company = models.CharField(max_length=200, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return str(self.title)
