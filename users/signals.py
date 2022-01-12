@@ -50,9 +50,11 @@ def updateProfile(sender, instance, created, **kwargs):
 
 
 def deleteUser(sender, instance, **kwargs):
-    user = instance.user
-    user.delete()
-
+    try:
+        user = instance.user
+        user.delete()
+    except:
+        pass
 
 # IMPORTANT: the .connect sets up the connections between the method and an instance of the object that will passed
 # to the method
