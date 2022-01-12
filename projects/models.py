@@ -6,7 +6,7 @@ from users.models import Profile
 # Create your models here.
 class Project(models.Model):
     # user models.foreignKey to create a many-to-one relationship ( project(many) - profiles(one) )
-    owner = models.ForeignKey(Profile, blank=True, null=True, on_delete=models.SET_NULL)
+    owner = models.ForeignKey(Profile, blank=True, null=True, on_delete=models.CASCADE)
 
     # table models that appear in admin database
     title = models.CharField(max_length=200)
