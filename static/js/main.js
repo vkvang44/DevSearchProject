@@ -20,3 +20,25 @@ if (searchForm) {
         })
     }
 }
+
+// deals with removing tags from project form
+let tags =  document.getElementsByClassName('project-tag')
+
+for (let i=0; i<tags.length; i++) {
+    tags[i].addEventListener('click', (e) => {
+        let tagId = e.currentTarget.dataset.tag
+        let projectId = e.currentTarget.dataset.project
+
+        fetch('http://127.0.0.1:8000/api/remove_tag/', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({'project':projectId, 'tag':tagId})
+        })
+        .then(response => response.json())
+        .then(data => {
+            e.target.remove()
+        })
+    })
+}
