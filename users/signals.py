@@ -13,6 +13,7 @@ from .models import Profile
 from django.core.mail import send_mail
 from django.conf import settings
 
+
 # this methods checks if user if being created for the first time after a save(). if true, then it creates a profile
 # for the new user
 def createProfile(sender, instance, created, **kwargs):

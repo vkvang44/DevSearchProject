@@ -27,6 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('projects/', include('projects.urls')),
     path('', include('users.urls')),
+    path('api/', include('api.urls')),
 
     # setup pw reset
     # user submits email for reset
