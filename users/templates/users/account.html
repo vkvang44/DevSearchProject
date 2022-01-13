@@ -48,10 +48,10 @@
             <h3 class="devInfo__title">About Me</h3>
             <p class="devInfo__about">{{profile.bio}}</p>
           </div>
-          <!-- Experience Model
+          <!-- Experience Model -->
           <div class="settings">
             <h3 class="settings__title">Job Experience</h3>
-            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="#"><i class="im im-plus"></i> Add Experience</a>
+            <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{%url 'create_exp'%}"><i class="im im-plus"></i> Add Experience</a>
           </div>
           <table class="settings__table">
             {% for exp in profile.experience_set.all %}
@@ -70,7 +70,7 @@
             </tr>
             {% endfor %}
           </table>
-          -->
+
           <div class="settings">
             <h3 class="settings__title">Skills</h3>
             <a class="tag tag--pill tag--sub settings__btn tag--lg" href="{% url 'create_skill' %}"><i class="im im-plus"></i> Add Skill</a>

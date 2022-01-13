@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from .models import Profile, Message
 from django.contrib import messages
-from .form import CustomUserCreationForm, ProfileForm, SkillForm, MessageForm #ExperienceForm
+from .form import CustomUserCreationForm, ProfileForm, SkillForm, MessageForm, ExperienceForm
 from django.contrib.auth.decorators import login_required
 from .utils import searchProfiles, profilePagination
 
@@ -111,50 +111,50 @@ def editAccount(request):
 
 
 # uuid issues when connecting with postgre database
-# @login_required(login_url='login')
-# def createExperience(request):
-#     profile = request.user.profile
-#     form = ExperienceForm()
-#
-#     if request.method == "POST":
-#         form = ExperienceForm(request.POST)
-#         if form.is_valid():
-#             exp = form.save(commit=False)
-#             exp.owner = profile
-#             exp.save()
-#             messages.success(request, 'Experience was added!')
-#             return redirect('account')
-#
-#     context = {'form':form}
-#     return render(request, 'users/experience_form.html', context)
-#
-# @login_required(login_url='login')
-# def updateExperience(request, pk):
-#     profile = request.user.profile
-#     exp = profile.experience_set.get(id=pk)
-#     form = ExperienceForm(instance=exp)
-#
-#     if request.method == "POST":
-#         form = ExperienceForm(request.POST, instance=exp)
-#         if form.is_valid():
-#             exp.save()
-#             messages.success(request, 'Experience was updated!')
-#             return redirect('account')
-#
-#     context = {'form': form}
-#     return render(request, 'users/experience_form.html', context)
-#
-#
-# @login_required(login_url='login')
-# def deleteExp(request, pk):
-#     profile = request.user.profile
-#     exp = profile.experience_set.get(id=pk)
-#     if request.method == "POST":
-#         exp.delete()
-#         messages.success(request, 'Experience was deleted!')
-#         return redirect('account')
-#     context = {'object': exp}
-#     return render(request, 'delete_obj.html', context)
+@login_required(login_url='login')
+def createExperience(request):
+    profile = request.user.profile
+    form = ExperienceForm()
+
+    if request.method == "POST":
+        form = ExperienceForm(request.POST)
+        if form.is_valid():
+            exp = form.save(commit=False)
+            exp.owner = profile
+            exp.save()
+            messages.success(request, 'Experience was added!')
+            return redirect('account')
+
+    context = {'form':form}
+    return render(request, 'users/experience_form.html', context)
+
+@login_required(login_url='login')
+def updateExperience(request, pk):
+    profile = request.user.profile
+    exp = profile.experience_set.get(id=pk)
+    form = ExperienceForm(instance=exp)
+
+    if request.method == "POST":
+        form = ExperienceForm(request.POST, instance=exp)
+        if form.is_valid():
+            exp.save()
+            messages.success(request, 'Experience was updated!')
+            return redirect('account')
+
+    context = {'form': form}
+    return render(request, 'users/experience_form.html', context)
+
+
+@login_required(login_url='login')
+def deleteExp(request, pk):
+    profile = request.user.profile
+    exp = profile.experience_set.get(id=pk)
+    if request.method == "POST":
+        exp.delete()
+        messages.success(request, 'Experience was deleted!')
+        return redirect('account')
+    context = {'object': exp}
+    return render(request, 'delete_obj.html', context)
 
 
 @login_required(login_url='login')

@@ -69,13 +69,13 @@ class Message(models.Model):
         ordering = ['is_read', '-created']
 
 
-# class Experience(models.Model):
-#     owner = models.ForeignKey(Profile, blank=True, null=True, on_delete=models.CASCADE)
-#     title = models.CharField(max_length=200, blank=True, null=True)
-#     company = models.CharField(max_length=200, blank=True, null=True)
-#     description = models.TextField(blank=True, null=True)
-#     created = models.DateTimeField(auto_now_add=True)
-#     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
-#
-#     def __str__(self):
-#         return str(self.title)
+class Experience(models.Model):
+    owner = models.ForeignKey(Profile, blank=True, null=True, on_delete=models.CASCADE)
+    title = models.CharField(max_length=200, blank=True, null=True)
+    company = models.CharField(max_length=200, blank=True, null=True)
+    description = models.TextField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return str(self.title)
