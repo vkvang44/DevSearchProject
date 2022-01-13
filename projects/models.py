@@ -25,7 +25,7 @@ class Project(models.Model):
     
     created an image field model that allows users to upload images
     '''
-    featured_image = models.ImageField(null=True, blank=True, default='default.jpg')
+    featured_image = models.ImageField(null=True, blank=True, default='projects/default.jpg', upload_to="projects/")
 
     # create a connection from project to tags, project to Review
     tags = models.ManyToManyField('Tag', blank=True)
