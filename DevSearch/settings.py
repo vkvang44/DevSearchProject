@@ -14,6 +14,11 @@ from pathlib import Path
 import os
 from datetime import timedelta
 from django.conf import settings
+import environ
+
+# init environment variables
+env = environ.Env()
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,7 +28,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-gfuc$97vy1x-9-)o1vwd)#x!+dn_(4%b$(1!mnf$am0d=%r!_!'
+SECRET_KEY = env("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -142,11 +147,11 @@ WSGI_APPLICATION = 'DevSearch.wsgi.application'
 DATABASES = {
    'default': {
       'ENGINE': 'django.db.backends.postgresql',
-       'NAME':'devsearch',
-       'USER':'postgres',
-       'PASSWORD':'password',
-       'PORT':'5432',
-       'HOST':'localhost',
+       'NAME': env("DATABASE_NAME"),
+       'USER': env("DATABASE_USER"),
+       'PASSWORD': env("DB_PASSWORD"),
+       'PORT': env("DB_PORT"),
+       'HOST': env("DB_HOST"),
    }
 }
 
