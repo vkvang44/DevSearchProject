@@ -128,13 +128,28 @@ WSGI_APPLICATION = 'DevSearch.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+# original database setup
+#DATABASES = {
+#   'default': {
+#       'ENGINE': 'django.db.backends.sqlite3',
+#       'NAME': BASE_DIR / 'db.sqlite3',
+#   }
+#}
 
+
+# postgre db setup
+# note: need to pip install pyscopg2 database adaptor to allow django to connect to postgre
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+   'default': {
+      'ENGINE': 'django.db.backends.postgresql',
+       'NAME':'devsearch',
+       'USER':'postgres',
+       'PASSWORD':'password',
+       'PORT':'5432',
+       'HOST':'localhost',
+   }
 }
+
 
 
 # Password validation

@@ -16,9 +16,9 @@ urlpatterns = [
     path('update_skill/<str:pk>', views.updateSkill, name='update_skill'),
     path('delete_skill/<str:pk>', views.deleteSkill, name='delete_skill'),
 
-    path('create_exp/', views.createExperience, name='create_exp'),
-    path('update_exp/<str:pk>', views.updateExperience, name='update_exp'),
-    path('delete_exp/<str:pk>', views.deleteExp, name='delete_exp'),
+    # path('create_exp/', views.createExperience, name='create_exp'),
+    # path('update_exp/<str:pk>', views.updateExperience, name='update_exp'),
+    # path('delete_exp/<str:pk>', views.deleteExp, name='delete_exp'),
 
     path('inbox/', views.inbox, name='inbox'),
     path('message_page/<str:pk>', views.messagePage, name='message_page'),

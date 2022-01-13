@@ -1,6 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile, Skill, Message, Experience
+from .models import Profile, Skill, Message #Experience
 from django.forms import ModelForm
 
 
@@ -56,14 +56,14 @@ class MessageForm(ModelForm):
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input', })
 
-
-class ExperienceForm(ModelForm):
-    class Meta:
-        model = Experience
-        fields = ['title', 'company', 'description']
-
-    def __init__(self, *args, **kwargs):
-        super(ExperienceForm, self).__init__(*args, **kwargs)
-
-        for field_name, field in self.fields.items():
-            field.widget.attrs.update({'class': 'input', })
+#
+# class ExperienceForm(ModelForm):
+#     class Meta:
+#         model = Experience
+#         fields = ['title', 'company', 'description']
+#
+#     def __init__(self, *args, **kwargs):
+#         super(ExperienceForm, self).__init__(*args, **kwargs)
+#
+#         for field_name, field in self.fields.items():
+#             field.widget.attrs.update({'class': 'input', })
