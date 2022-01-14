@@ -14,8 +14,8 @@ def getRoutes(request):
         {'GET': '/api/projects/id'},
         {'POST': '/api/projects/id/vote'},
 
-        {'POST': '/api/projects/token'},
-        {'POST': '/api/projects/token/refresh'},
+        {'POST': '/api/users/token'},
+        {'POST': '/api/users/token/refresh'},
     ]
     return Response(routes)
 
