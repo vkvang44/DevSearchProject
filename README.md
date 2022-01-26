@@ -16,8 +16,14 @@ A social media based website for developers to connect around the world and shar
 * Simple REST API allowing external frontend applications to connect
 * Search functionality for specific users/projects
 * Rating other people's project by upvoting / downvoting / leaving feedback
- 
- #Installation
+
+# Potential Ideas to Expand Upon Project
+* Unit/Integration testing
+* Deploy online to Heroku
+* Utilize AWS RDS to host database in the cloud
+* Utitlise AWS S3 to host user uploaded content like profile/project images to avoid pollution of static files in project directory
+
+# Installation
 * 1 - Clone the repo
 * 2 - Create virtual environment and activate
 *  - pip install virtualvenv
@@ -27,8 +33,3 @@ A social media based website for developers to connect around the world and shar
 *  4 - pip install -r requirements.txt
 *  5. python manage.py runserver
 
-# Potential Ideas to Expand Upon Project
-* Unit/Integration testing
-* Deploy online to Heroku
-* Utilize AWS RDS to host database in the cloud
-* Utitlise AWS S3 to host user uploaded content like profile/project images to avoid pollution of static files in project directory
