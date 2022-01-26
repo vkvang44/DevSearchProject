@@ -52,7 +52,7 @@ class MessageModelTest(TestCase):
         self.assertEqual(message.subject, "test")
 
 
-# class based testing allows for quicker testing by referencing self
+# class based testing allows for quicker testing by referencing class
 class ExperienceModelTest(TestCase):
     @classmethod
     def setUpTestData(cls):
