@@ -33,3 +33,8 @@ A social media based website for developers to connect around the world and shar
 *  4 - pip install -r requirements.txt
 *  5. python manage.py runserver
 
+# Account
+<video autoplay loop muted inline width="100%">
+  <source src="./resources/account.mp4" type="video/webm">
+</video>
+
