@@ -33,6 +33,12 @@ A social media based website for developers to connect around the world and shar
 *  4 - pip install -r requirements.txt
 *  5. python manage.py runserver
 
+# Account
+![Profile](./resources/account.gif)
+
+# Project
+![Profile](./resources/project.gif)
+
 # Profile
 ![Profile](./resources/profile.gif)
 
