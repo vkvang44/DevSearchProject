@@ -21,7 +21,7 @@ A social media based website for developers to connect around the world and shar
 * Unit/Integration testing
 * Deploy online to Heroku
 * Utilize AWS RDS to host database in the cloud
-* Utitlise AWS S3 to host user uploaded content like profile/project images to avoid pollution of static files in project directory
+* Utilize AWS S3 to host user uploaded content like profile/project images to avoid pollution of static files in project directory
 
 # Installation
 * 1 - Clone the repo
